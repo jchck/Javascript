@@ -1,0 +1,22 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "## Student Instructions",
+  "main": "app.js",
+  "scripts": {
+    "server": "browser-sync './' -w",
+    "start": "npm run server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jchck/Javascript.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/jchck/Javascript/issues"
+  },
+  "homepage": "https://github.com/jchck/Javascript#readme",
+  "dependencies": {
+    "browser-sync": "^2.26.12"
+  }
+}
