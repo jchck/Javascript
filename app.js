@@ -11,7 +11,7 @@ const DATA = './dino.json';
       })
     })
 
-    console.log(dinoArray)
+    // console.log(dinoArray)
 
       // Create Dino Constructor
   function Animal(species, weight, height, diet, where, when, fact, img) {
@@ -27,7 +27,7 @@ const DATA = './dino.json';
 
 
   // Create Dino Objects
-  const dinoObjs = dinoArray.map(dino => new Animal(
+  const dinoObjects = dinoArray.map(dino => new Animal(
     dino.species,
     dino.weight,
     dino.height,
@@ -38,15 +38,23 @@ const DATA = './dino.json';
     dino.img
   ));
 
-  console.log(dinoObjs)
+  // console.log(dinoObjects)
 
   // Create Human Object
-})();
-    // Use IIFE to get human data from form
+  const humanObject = new Animal();
+  // Use IIFE to get human data from form
     // data in dino.json is in lbs & inches
-(function() {
-
-})()
+    (function(humanObject) {
+      humanObject.species = document.getElementById('name').value;
+      humanObject.weight = document.getElementById('weight').value;
+      humanObject.feet = document.getElementById('feet').value;
+      humanObject.inches = document.getElementById('inches').value;
+      humanObject.diet = document.getElementById('diet').value;
+      // humanObject.fact = ...
+      humanObject.img = 'images/human.png';
+    })(humanObject)
+  console.log(humanObject)
+})();
 
 
     // Create Dino Compare Method 1
