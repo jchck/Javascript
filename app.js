@@ -54,13 +54,7 @@ function init() {
         humanObject.img = 'images/human.png';
       })(humanObject)
     console.log(humanObject)
-  })();
-
-  console.log('init() called')
-} // end init()
-
-
-    // Create Dino Compare Method 1
+      // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches.
 
 
@@ -71,10 +65,22 @@ function init() {
     // Create Dino Compare Method 3
     // NOTE: Weight in JSON file is in lbs, height in inches.
 
-
     // Generate Tiles for each Dino in Array
+    const tiles = () => {
+      for (let i = 0; i < dinoArray.length; i++) {
+        const title = document.createElement('div');
+        title.className = 'grid-item';
+        title.innerHTML = dinoArray[i].species;
 
+        document.getElementById('grid').appendChild(title);
+      }
+    }
 
+    return tiles();
+  })(); // end async
+
+  console.log('init() called')
+} // end init()
 
 // On button click, prepare and display infographic
 document.getElementById('btn').addEventListener('click', () => {
