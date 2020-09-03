@@ -73,8 +73,10 @@ const DATA = './dino.json';
 
         // Add tiles to DOM
 
-    // Remove form from screen
 
 
 // On button click, prepare and display infographic
-
+document.getElementById('btn').addEventListener('click', () => {
+  // Remove form from screen
+  document.querySelector('form').style.display = 'none'
+})
