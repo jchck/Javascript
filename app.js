@@ -113,7 +113,7 @@ function init() {
         gridItem.className = 'grid-item';
         title.innerHTML = dinoArray[i].species;
         img.setAttribute('src', dinoArray[i].img);
-        fact.innerHTML = dinoArray[i].fact[1];
+        fact.innerHTML = dinoArray[i].fact;
       }
 
     }
