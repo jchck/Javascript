@@ -2,24 +2,30 @@ const DATA = './dino.json';
 
 function init() {
   (async () => {
-    /**
-     * build dinoArray with data fetched from external JSON
-     */
-    const dinoArray = [];
-    await fetch(DATA)
+    const dinoData = await fetch(DATA)
       .then(response => response.json())
-      .then(response => {
-        response.Dinos.map((dino) => {
-          dinoArray.push(dino);
-        })
-      })
+      .then(response => response.Dinos)
+      // TODO : catch errors
+      // .catch()
+
+    const dinosaurs = dinoData.map(dino => new Animal(
+      dino.species,
+      dino.weight,
+      dino.height,
+      dino.diet,
+      dino.where,
+      dino.when,
+      dino.fact,
+      dino.image
+    ));
+
+    console.log(dinosaurs)
 
       /**
-       * loop over dinoArray
-       * add img key to each entry
+       * loop over dinosaurs
        * set img value equal to the species name
        */
-      dinoArray.forEach((entry) => {
+      dinosaurs.forEach((entry) => {
         let dinoImg = entry.species.toLowerCase();
         entry.img = `images/${dinoImg}.png`;
       })
@@ -56,47 +62,33 @@ function init() {
         humanObject.height = feet + inches;
         // form diet = diet
         humanObject.diet = document.getElementById('diet').value;
-        humanObject.fact = [compareHeight(), compareWeight(), compareDiet()];
+        humanObject.fact = '';
         humanObject.img = 'images/human.png';
       })(humanObject)
     }
 
+    // console.log(humanObject)
+
       // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches.
-    const compareHeight = () => humanObject.height < dinoArray[0].height ? `${humanObject.species} is shorter than a ${dinoArray[0].species}!` : `${humanObject.species} is taller than a ${dinoArray[0].species}!`;
+    // const compareDiet = function(human, dino) {
+    //   console.log(human);
+    //   console.log(dino);
+    // }
+    // compareDiet(humanObject, dinoArray);
 
     // Create Dino Compare Method 2
     // NOTE: Weight in JSON file is in lbs, height in inches.
-    // const compareWeight = humanObject.weight < dinoArray[2].weight ? `${humanObject.species}` is
-    const compareWeight = () => {
-      if (humanObject.weight < dinoArray[1].weight) {
-        return `${humanObject.species} is ${dinoArray[1].weight - humanObject.weight} pounds lighter than a ${dinoArray[1].species}`;
-      }
-      else {
-        return `${humanObject.species} is ${dinoArray[1].weight + humanObject.weight} pounds heavier than a ${dinoArray[1].species}`;
-      }
-    }
 
     // Create Dino Compare Method 3
     // NOTE: Weight in JSON file is in lbs, height in inches.
-    const compareDiet = () => {
-      if (humanObject.diet === 'Herbavor') {
-        return `${humanObject.species} has the same diet as a ${dinoArray[0].species} and a ${dinoArray[2].species}`;
-      }
-      else if(humanObject.diet === 'Carnivor') {
-        return `${humanObject.species} has the same diet as a ${dinoArray[1].species}`;
-      }
-      else {
-        return `${humanObject.species} is an Omnivor!`;
-      }
-    }
 
     // Generate Tiles for each Dino in Array
     const tiles = () => {
-      // put human in middle of dinoArray
-      dinoArray.splice(4, 0, humanObject);
+      // put human in middle
+      dinosaurs.splice(4, 0, humanObject);
 
-      for (let i = 0; i < dinoArray.length; i++) {
+      for (let i = 0; i < dinosaurs.length; i++) {
         // create DOM elements
         const gridItem = document.createElement('div');
         const title = document.createElement('h3');
@@ -111,9 +103,9 @@ function init() {
 
         // set content + attr of DOM elements
         gridItem.className = 'grid-item';
-        title.innerHTML = dinoArray[i].species;
-        img.setAttribute('src', dinoArray[i].img);
-        fact.innerHTML = dinoArray[i].fact;
+        title.innerHTML = dinosaurs[i].species;
+        img.setAttribute('src', dinosaurs[i].img);
+        fact.innerHTML = dinosaurs[i].fact;
       }
 
     }
