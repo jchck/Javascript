@@ -8,6 +8,18 @@ function init() {
       // TODO : catch errors
       // .catch()
 
+      // Animal constructor
+    function Animal(species, weight, height, diet, where, when, fact, img) {
+      this.species = species;
+      this.weight = weight;
+      this.height = height;
+      this.diet = diet;
+      this.where = where;
+      this.when = when;
+      this.fact = fact;
+      this.img = img;
+    }
+
     const dinosaurs = dinoData.map(dino => new Animal(
       dino.species,
       dino.weight,
@@ -19,8 +31,6 @@ function init() {
       dino.image
     ));
 
-    console.log(dinosaurs)
-
       /**
        * loop over dinosaurs
        * set img value equal to the species name
@@ -29,18 +39,6 @@ function init() {
         let dinoImg = entry.species.toLowerCase();
         entry.img = `images/${dinoImg}.png`;
       })
-
-    // Animal constructor
-    function Animal(species, weight, height, diet, where, when, fact, img) {
-      this.species = species;
-      this.weight = weight;
-      this.height = height;
-      this.diet = diet;
-      this.where = where;
-      this.when = when;
-      this.fact = fact;
-      this.img = img;
-    }
 
     /**
      * use Animal constructor to create humanObject
@@ -67,15 +65,17 @@ function init() {
       })(humanObject)
     }
 
-    // console.log(humanObject)
-
       // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches.
-    // const compareDiet = function(human, dino) {
-    //   console.log(human);
-    //   console.log(dino);
-    // }
-    // compareDiet(humanObject, dinoArray);
+    /**
+     * read human diet
+     * filter dinosaurs obj and return only those whos diet matches
+     */
+    const compareDiet = (human, dino) => {
+      const humanDiet = human.diet;
+      // console.log(human.diet) -> undefined
+    }
+    compareDiet(humanObject, dinosaurs)
 
     // Create Dino Compare Method 2
     // NOTE: Weight in JSON file is in lbs, height in inches.
