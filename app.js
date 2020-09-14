@@ -75,7 +75,7 @@ function init() {
         humanObject.height = feet + inches;
         // form diet = diet
         humanObject.diet = document.getElementById('diet').value;
-        humanObject.fact = '';
+        // humanObject.fact = '';
         humanObject.img = 'images/human.png';
       })(humanObject)
     }
@@ -141,12 +141,25 @@ function init() {
         }
 
         const facts = [compareDiet(), compareHeight(), compareWeight()];
-        const random = (randomize) => {
-          return randomize[Math.floor(Math.random() * randomize.length)];
-        }
-        dinosaurs[i].fact = random(facts);
+
+        const random = (randomize) => randomize[Math.floor(Math.random() * randomize.length)];
+
+        const oldFact = dinosaurs[i].fact;
+        const newFact = random(facts);
+
         fact.innerHTML = dinosaurs[i].fact;
-        console.log(dinosaurs[i])
+        if (dinosaurs[i].species === humanObject.species) { // if human
+          fact.innerHTML = ''
+        }
+        else if (dinosaurs[i].species === 'Pigeon') { // if bird
+          fact.innerHTML = oldFact;
+        }
+        else if(newFact === undefined) {
+          fact.innerHTML = oldFact;
+        }
+        else {
+          fact.innerHTML = newFact;
+        }
       }
     }
 
