@@ -3,10 +3,24 @@ const DATA = './dino.json';
 function init() {
   (async () => {
     const dinoData = await fetch(DATA)
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response;
+        }
+        else {
+          const error = new Error(`Error ${response.status}: ${response.statusText}`);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+        const errorMessage = new Error(error.message);
+        throw errorMessage;
+      })
       .then(response => response.Dinos)
-      // TODO : catch errors
-      // .catch()
+      .catch(error => {
+        console.log(`Error: ${error.message}`);
+      })
 
       // Animal constructor
     function Animal(species, weight, height, diet, where, when, fact, img) {
