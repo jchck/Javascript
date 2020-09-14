@@ -17,6 +17,7 @@ function init() {
         const errorMessage = new Error(error.message);
         throw errorMessage;
       })
+      .then(response => response.json())
       .then(response => response.Dinos)
       .catch(error => {
         console.log(`Error: ${error.message}`);
@@ -79,28 +80,11 @@ function init() {
       })(humanObject)
     }
 
-      // Create Dino Compare Method 1
-    // NOTE: Weight in JSON file is in lbs, height in inches.
-    /**
-     * read human diet
-     * filter dinosaurs obj and return only those whos diet matches
-     */
-    const compareDiet = (human, dino) => {
-      const humanDiet = human.diet;
-      // console.log(human.diet) -> undefined
-    }
-    compareDiet(humanObject, dinosaurs)
-
-    // Create Dino Compare Method 2
-    // NOTE: Weight in JSON file is in lbs, height in inches.
-
-    // Create Dino Compare Method 3
-    // NOTE: Weight in JSON file is in lbs, height in inches.
+    // put human in middle
+    dinosaurs.splice(4, 0, humanObject);
 
     // Generate Tiles for each Dino in Array
     const tiles = () => {
-      // put human in middle
-      dinosaurs.splice(4, 0, humanObject);
 
       for (let i = 0; i < dinosaurs.length; i++) {
         // create DOM elements
@@ -119,9 +103,40 @@ function init() {
         gridItem.className = 'grid-item';
         title.innerHTML = dinosaurs[i].species;
         img.setAttribute('src', dinosaurs[i].img);
-        fact.innerHTML = dinosaurs[i].fact;
-      }
 
+        // Create Dino Compare Method 1
+        // NOTE: Weight in JSON file is in lbs, height in inches.
+        const compareDiet = () => {
+          if (dinosaurs[i].diet === 'herbavor' && humanObject.diet === 'Herbavor') {
+            return `${humanObject.species} has same diet as a ${dinosaurs[i].species}`;
+          }
+        }
+
+        // Create Dino Compare Method 2
+        // NOTE: Weight in JSON file is in lbs, height in inches.
+        const compareHeight = () => {
+          if (humanObject.height < dinosaurs[i].height) {
+            return `${humanObject.species} is ${dinosaurs[i].height - humanObject.height} inches shorter than a ${dinosaurs[i].species}`
+          }
+          else if (humanObject.height > dinosaurs[i].height) {
+            return `${humanObject.species} is ${humanObject.height - dinosaurs[i].height} inches taller than a ${dinosaurs[i].species}`
+          }
+          else if (humanObject.height === dinosaurs[i].height) {
+            return `${humanObject.species} is the same height as a ${dinosaurs[i].species}!`
+          }
+        }
+
+        // Create Dino Compare Method 3
+        // NOTE: Weight in JSON file is in lbs, height in inches.
+
+        const facts = [compareDiet(), compareHeight()];
+        const random = (randomize) => {
+          return randomize[Math.floor(Math.random() * randomize.length)];
+        }
+        dinosaurs[i].fact = random(facts);
+        fact.innerHTML = dinosaurs[i].fact;
+        console.log(dinosaurs[i])
+      }
     }
 
     return tiles(humanData());
