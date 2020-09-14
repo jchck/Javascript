@@ -128,8 +128,19 @@ function init() {
 
         // Create Dino Compare Method 3
         // NOTE: Weight in JSON file is in lbs, height in inches.
+        const compareWeight = () => {
+          if (humanObject.weight < dinosaurs[i].weight) {
+            return `${humanObject.species} is ${dinosaurs[i].weight - humanObject.weight} pounds lighter than a ${dinosaurs[i].species}`
+          }
+          else if (humanObject.weight > dinosaurs[i].weight) {
+            return `${humanObject.species} is ${humanObject.weight - dinosaurs[i].weight} pounds heavier than a ${dinosaurs[i].species}`
+          }
+          else if (humanObject.weight === dinosaurs[i].weight) {
+            return `${humanObject.species} is the same weight as a ${dinosaurs[i].species}!`
+          }
+        }
 
-        const facts = [compareDiet(), compareHeight()];
+        const facts = [compareDiet(), compareHeight(), compareWeight()];
         const random = (randomize) => {
           return randomize[Math.floor(Math.random() * randomize.length)];
         }
