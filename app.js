@@ -116,13 +116,13 @@ function init() {
         // NOTE: Weight in JSON file is in lbs, height in inches.
         const compareHeight = () => {
           if (humanObject.height < dinosaurs[i].height) {
-            return `${humanObject.species} is ${dinosaurs[i].height - humanObject.height} inches shorter than a ${dinosaurs[i].species}`
+            return `${humanObject.species} is ${dinosaurs[i].height - humanObject.height} inches shorter than a ${dinosaurs[i].species}`;
           }
           else if (humanObject.height > dinosaurs[i].height) {
-            return `${humanObject.species} is ${humanObject.height - dinosaurs[i].height} inches taller than a ${dinosaurs[i].species}`
+            return `${humanObject.species} is ${humanObject.height - dinosaurs[i].height} inches taller than a ${dinosaurs[i].species}`;
           }
           else if (humanObject.height === dinosaurs[i].height) {
-            return `${humanObject.species} is the same height as a ${dinosaurs[i].species}!`
+            return `${humanObject.species} is the same height as a ${dinosaurs[i].species}!`;
           }
         }
 
@@ -130,26 +130,24 @@ function init() {
         // NOTE: Weight in JSON file is in lbs, height in inches.
         const compareWeight = () => {
           if (humanObject.weight < dinosaurs[i].weight) {
-            return `${humanObject.species} is ${dinosaurs[i].weight - humanObject.weight} pounds lighter than a ${dinosaurs[i].species}`
+            return `${humanObject.species} is ${dinosaurs[i].weight - humanObject.weight} pounds lighter than a ${dinosaurs[i].species}`;
           }
           else if (humanObject.weight > dinosaurs[i].weight) {
-            return `${humanObject.species} is ${humanObject.weight - dinosaurs[i].weight} pounds heavier than a ${dinosaurs[i].species}`
+            return `${humanObject.species} is ${humanObject.weight - dinosaurs[i].weight} pounds heavier than a ${dinosaurs[i].species}`;
           }
           else if (humanObject.weight === dinosaurs[i].weight) {
-            return `${humanObject.species} is the same weight as a ${dinosaurs[i].species}!`
+            return `${humanObject.species} is the same weight as a ${dinosaurs[i].species}!`;
           }
         }
 
         const facts = [compareDiet(), compareHeight(), compareWeight()];
-
         const random = (randomize) => randomize[Math.floor(Math.random() * randomize.length)];
-
         const oldFact = dinosaurs[i].fact;
         const newFact = random(facts);
 
         fact.innerHTML = dinosaurs[i].fact;
         if (dinosaurs[i].species === humanObject.species) { // if human
-          fact.innerHTML = ''
+          fact.innerHTML = '';
         }
         else if (dinosaurs[i].species === 'Pigeon') { // if bird
           fact.innerHTML = oldFact;
